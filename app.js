@@ -532,14 +532,15 @@ function listenForJobs() {
     const jobsQuery = firebase.firestore().collection("jobs").orderBy("createdAt", "desc");
     jobsQuery.onSnapshot((snapshot) => {
         allJobsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        if (currentView === 'jobs') {
-            renderJobs(allJobsData);
-        }
+        // Always attempt to render jobs; renderJobs has internal checks for DOM elements
+        renderJobs(allJobsData); 
+        
         if (currentView === 'dashboard') {
-            listenForDashboardData();
+            listenForDashboardData(); // This will re-render dashboard stats if needed
         }
         if (currentView === 'schedule') {
-            loadTripSheetsForDate(tripSheetDateInput.value);
+            // Re-load trip sheets which might depend on updated job data for status
+            loadTripSheetsForDate(tripSheetDateInput.value); 
         }
     }, (error) => {
         console.error("Error listening for jobs:", error);
@@ -551,10 +552,12 @@ function listenForTechnicians() {
     techQuery.onSnapshot((snapshot) => {
         const technicians = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         allTechniciansData = technicians;
-        if (currentView === 'technicians') {
-            renderTechnicians(technicians);
-        }
+        // Always attempt to render technicians; renderTechnicians has internal checks
+        renderTechnicians(technicians); 
+        
         populateTechnicianDropdowns();
+        // If on dashboard, tech data might be relevant for map or other elements (future)
+        // if (currentView === 'dashboard') { /* Potentially update dashboard elements */ }
     }, (error) => console.error("Error listening for technicians:", error));
 }
 
