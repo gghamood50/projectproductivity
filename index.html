@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safeway OS - Garage Solutions</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Inter%3Awght%40400%3B500%3B700%3B900&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="flex items-center justify-center min-h-screen bg-slate-100">
+        <div class="p-8 bg-white shadow-xl rounded-lg w-full max-w-md">
+            <div class="flex justify-center mb-6">
+                <div class="size-12 text-green-700">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-center text-slate-800 mb-1">Welcome Back</h2>
+            <p class="text-center text-slate-600 mb-6">Sign in to access Safeway OS.</p>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label for="loginEmail" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" name="loginEmail" required
+                           class="form-input w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                           placeholder="you@example.com">
+                </div>
+                <div class="mb-6">
+                    <label for="loginPassword" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required
+                           class="form-input w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                           placeholder="••••••••">
+                </div>
+                <div id="loginErrorMessage" class="mb-4 text-sm text-red-600 text-center"></div>
+                <button type="submit"
+                        class="btn-primary-stitch w-full justify-center py-3 text-base">
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Admin Layout Container -->
+    <div id="layoutContainer" class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style="display: none;">
+        <div class="flex h-full grow flex-col">
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 bg-white px-10 py-4 shadow-sm sticky top-0 z-50">
+                <div class="flex items-center gap-3 text-slate-900">
+                    <div class="size-8 text-green-700">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-slate-900 text-xl font-bold leading-tight tracking-[-0.015em]">Safeway OS</h1>
+                </div>
+                <nav class="flex items-center gap-1 overflow-x-auto">
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="dashboard">
+                        <span class="material-icons-outlined text-xl">dashboard</span>Dashboard
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="jobs">
+                        <span class="material-icons-outlined text-xl">build</span>Jobs
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="technicians">
+                        <span class="material-icons-outlined text-xl">people</span>Technicians
+                    </a>
+                     <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="schedule">
+                        <span class="material-icons-outlined text-xl">calendar_today</span>Schedule
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="inventory">
+                        <span class="material-icons-outlined text-xl">inventory_2</span>Inventory
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="warranty">
+                        <span class="material-icons-outlined text-xl">verified_user</span>Warranty
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="daniel">
+                        <span class="material-icons-outlined text-xl">smart_toy</span>Daniel (AI)
+                    </a>
+                    <a class="nav-link text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors" href="#" data-target="settings">
+                        <span class="material-icons-outlined text-xl">settings</span>Settings
+                    </a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <div id="userAvatar" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white shadow-sm" style='background-image: url("https://placehold.co/40x40/059669/FFFFFF?text=S");'></div>
+                    <button id="logoutBtn" class="text-slate-700 hover:text-green-700 flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium leading-normal transition-colors">
+                        <span class="material-icons-outlined text-xl">logout</span>Logout
+                    </button>
+                </div>
+            </header>
+
+            <main class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-16">
+                <div class="layout-content-container flex w-full max-w-7xl flex-col gap-6">
+
+                    <section id="dashboard" class="content-section hidden">
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Goodmorning, Fida.</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Lets make today productive.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-6">
+                            <div class="stat-card-stitch">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-slate-700 text-base font-medium leading-normal">Unscheduled Jobs</p>
+                                    <span class="material-icons-outlined text-xl text-amber-500">event_busy</span>
+                                </div>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="dashboardUnscheduledJobs">0</p> 
+                            </div>
+                            <div class="stat-card-stitch">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-slate-700 text-base font-medium leading-normal">Scheduled Jobs</p>
+                                    <span class="material-icons-outlined text-xl text-sky-500">event_available</span>
+                                </div>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="dashboardScheduledJobs">0</p>
+                            </div>
+                            <div class="stat-card-stitch">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-slate-700 text-base font-medium leading-normal">Total Jobs</p>
+                                    <span class="material-icons-outlined text-xl text-green-500">summarize</span> 
+                                </div>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="dashboardTotalJobs">0</p>
+                            </div>
+                            <div class="stat-card-stitch">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-slate-700 text-base font-medium leading-normal">Lifetime Trip Sheets</p>
+                                    <span class="material-icons-outlined text-xl text-purple-500">route</span>
+                                </div>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="dashboardLifetimeTripSheets">0</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+                            <div class="lg:col-span-2 content-card-stitch">
+                                <h3 class="text-slate-800 text-lg font-semibold leading-normal">Technician Live Overview</h3>
+                                <div class="bg-slate-200 h-96 rounded-lg flex items-center justify-center text-slate-500">
+                                    <span class="material-icons-outlined text-5xl mr-2">map</span> Mock Map Area (Live Locations)
+                                </div>
+                            </div>
+                            <div class="content-card-stitch">
+                                <h3 class="text-slate-800 text-lg font-semibold leading-normal">Latest 5 Jobs</h3>
+                                <ul class="space-y-3" id="dashboardLatestJobsList">
+                                    <li class="p-3 bg-slate-50 border border-slate-200 rounded-md text-slate-500">
+                                        Loading latest jobs...
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="jobs" class="content-section hidden">
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Job Management</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Live view of all jobs imported from Gmail.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-slate-800 text-lg font-semibold leading-normal">All Imported Jobs</h3>
+                                <button id="openAddJobModalButton" class="btn-primary-stitch">
+                                    <span class="material-icons-outlined text-lg">add_circle_outline</span>Add Job Manually
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="custom-table" id="jobsTable"> 
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Address</th>
+                                            <th>Issue Reported</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="jobsTableBody">
+                                        <!-- Live data will be injected here by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="technicians" class="content-section hidden">
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Technician Management</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Manage your field service team's status, location, and capacity.</p>
+                            </div>
+                        </div>
+                        <div id="technician-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
+                            <!-- Technician cards will be dynamically inserted here -->
+                        </div>
+                    </section>
+
+                    <section id="schedule" class="content-section hidden">
+                         <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Schedule & Dispatch</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Generate and approve optimized daily routes for all available technicians.</p>
+                            </div>
+                        </div>
+                        <div id="tripSheetApprovalContainer" class="hidden mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-800">Trip Sheets Generated</h3>
+                                <p class="text-sm text-blue-700">Review the routes below. Once satisfied, approve them to finalize the schedule.</p>
+                            </div>
+                            <button id="approveTripSheetsBtn" class="btn-approve-stitch">
+                                <span class="material-icons-outlined">check_circle</span>Approve Trip Sheets
+                            </button>
+                        </div>
+                        <div class="mt-6 flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                             <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+                                <h3 class="text-slate-800 text-lg font-semibold leading-normal">Daily Route Generation</h3>
+                                <div class="flex items-center gap-4 p-2 bg-slate-100 rounded-lg">
+                                    <label for="tripSheetDate" class="form-label text-sm font-semibold mb-0">TRIP SHEET DATE:</label>
+                                    <input type="date" id="tripSheetDate" class="form-input form-input-sm py-2 px-3 border-slate-300 shadow-sm" style="max-width: 200px;">
+                                    <button id="generateTripSheetsBtn" class="btn-primary-stitch">
+                                        <span class="material-icons-outlined text-lg">route</span>Generate Trip Sheets
+                                    </button>
+                                </div>
+                            </div>
+                            <p id="scheduleStatus" class="text-sm text-slate-500 text-center">Select a date to view or generate trip sheets.</p>
+                            <div id="trip-sheets-container" class="space-y-4">
+                                <!-- Trip sheets will be rendered here -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="inventory" class="content-section hidden">
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Inventory Management</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Track parts and manage stock levels.</p>
+                            </div>
+                             <div class="flex gap-2">
+                                <button id="openAddPartModalButton" class="btn-primary-stitch"><span class="material-icons-outlined text-lg">add_circle_outline</span>Add New Part</button>
+                                <button id="logPartUsageButton" class="btn-secondary-stitch bg-green-50 border-green-200 text-green-700 hover:bg-green-100"><span class="material-icons-outlined text-sm vm">construction</span>Log Part Usage</button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+                            <div class="stat-card-stitch">
+                                <p class="text-slate-700 text-base font-medium leading-normal">Total Part SKUs</p>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="inventoryTotalSKUs">0</p>
+                                <p class="text-xs text-slate-500">Different parts tracked</p>
+                            </div>
+                            <div class="stat-card-stitch">
+                                <p class="text-slate-700 text-base font-medium leading-normal">Low Stock Items</p>
+                                <p class="text-red-600 text-4xl font-bold leading-tight tracking-tight" id="inventoryLowStockItems">0</p>
+                                <p class="text-xs text-slate-500">Items below reorder level</p>
+                            </div>
+                            <div class="stat-card-stitch">
+                                <p class="text-slate-700 text-base font-medium leading-normal">Est. Inventory Value</p>
+                                <p class="text-slate-900 text-4xl font-bold leading-tight tracking-tight" id="inventoryEstValue">$0</p>
+                                <p class="text-xs text-slate-500">Based on current stock</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h3 class="text-slate-800 text-lg font-semibold leading-normal">Parts Inventory</h3>
+                            <div class="overflow-x-auto">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Part Name</th>
+                                            <th>SKU</th>
+                                            <th>Category</th>
+                                            <th>Current Stock</th>
+                                            <th>Reorder Level</th>
+                                            <th>Unit Cost</th>
+                                            <th>Supplier</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventoryTableBody">
+                                        <tr><td colspan="9" class="text-center text-slate-500 py-4">Loading inventory...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="warranty" class="content-section hidden">
+                        <div class="flex flex-col items-center justify-center h-full text-green-700 p-8 text-center">
+                            <span class="material-icons-outlined text-6xl">construction</span>
+                            <h2 class="text-2xl font-semibold mt-4">Warranty Under Construction</h2>
+                            <p class="text-slate-600 mt-2">This page is currently under construction. Please check back later!</p>
+                        </div>
+                    </section>
+                    <section id="daniel" class="content-section hidden bg-gradient-to-br from-slate-50 via-green-50 to-slate-50 p-0 m-0 flex flex-col" style="height: calc(100vh - 160px);"> 
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center px-6 pt-6 pb-2">
+                             <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Daniel - Your AI Assistant</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Ask questions about scheduling, job details, or get quick solutions.</p>
+                            </div>
+                        </div>
+                        <div class="chat-container bg-white flex-grow mx-6 mb-6">
+                            <div id="chatLog" class="chat-log">
+                                <!-- Initial AI message will be added by JavaScript -->
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" id="chatInput" class="chat-input" placeholder="Type your question here...">
+                                <button id="sendChatButton" class="chat-send-btn">
+                                    <span class="material-icons-outlined text-lg">send</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="settings" class="content-section hidden">
+                        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                            <div>
+                                <h1 class="text-slate-900 text-3xl font-bold leading-tight tracking-tight">Settings</h1>
+                                <p class="text-slate-600 text-base font-normal leading-normal">Manage your application preferences.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 content-card-stitch">
+                            <h3 class="text-slate-800 text-lg font-semibold leading-normal mb-4">Appearance</h3>
+                            <div class="flex items-center justify-between py-3">
+                                <label for="darkModeToggle" class="text-slate-700 font-medium">Dark Mode</label>
+                                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                    <input type="checkbox" name="darkModeToggle" id="darkModeToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                    <label for="darkModeToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">Toggle to switch between light and dark themes for the application.</p>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Worker PWA View -->
+    <div id="workerPwaView" class="hidden relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+        <div>
+            <div class="flex items-center bg-white p-4 pb-2 justify-between sticky top-0">
+                <div class="flex w-12"></div>
+                <h2 id="workerName" class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Hello, Worker</h2>
+                <div class="flex w-12 items-center justify-end">
+                    <button id="workerLogoutBtn" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-[#111418] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+                        <div class="text-[#111418]" data-icon="SignOut" data-size="24px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H56V200h48A8,8,0,0,1,112,216Zm115.51-99.51-48-48a8,8,0,0,0-11.32,11.32L196.69,108H104a8,8,0,0,0,0,16h92.69l-28.5,28.49a8,8,0,0,0,11.32,11.32l48-48A8,8,0,0,0,227.51,116.49Z"></path></svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <p id="workerCurrentDate" class="text-[#60758a] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Monday, July 22</p>
+            <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Today's Route</h2>
+            
+            <div id="workerTodaysRoute" class="flex flex-col">
+                <!-- Jobs will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="sticky bottom-0">
+            <div class="flex gap-2 border-t border-[#f0f2f5] bg-white px-4 pb-3 pt-2">
+                <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#111418]" href="#">
+                    <div class="text-[#111418] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"></path></svg>
+                    </div>
+                    <p class="text-[#111418] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+                </a>
+                <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60758a]" href="#">
+                    <div class="text-[#60758a] flex h-8 items-center justify-center" data-icon="Briefcase" data-size="24px" data-weight="regular">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path></svg>
+                    </div>
+                    <p class="text-[#60758a] text-xs font-medium leading-normal tracking-[0.015em]">Jobs</p>
+                </a>
+                <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60758a]" href="#">
+                    <div class="text-[#60758a] flex h-8 items-center justify-center" data-icon="Receipt" data-size="24px" data-weight="regular">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M72,104a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,104Zm8,40h96a8,8,0,0,0,0-16H80a8,8,0,0,0,0,16ZM232,56V208a8,8,0,0,1-11.58,7.15L192,200.94l-28.42,14.21a8,8,0,0,1-7.16,0L128,200.94,99.58,215.15a8,8,0,0,1-7.16,0L64,200.94,35.58,215.15A8,8,0,0,1,24,208V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56Zm-16,0H40V195.06l20.42-10.22a8,8,0,0,1,7.16,0L96,199.06l28.42-14.22a8,8,0,0,1,7.16,0L160,199.06l28.42-14.22a8,8,0,0,1,7.16,0L216,195.06Z"></path></svg>
+                    </div>
+                    <p class="text-[#60758a] text-xs font-medium leading-normal tracking-[0.015em]">Invoices</p>
+                </a>
+                <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60758a]" href="#">
+                    <div class="text-[#60758a] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="regular">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+                    </div>
+                    <p class="text-[#60758a] text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+                </a>
+            </div>
+            <div class="h-5 bg-white"></div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="addJobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Job Manually</h2>
+                <span class="close-button" id="closeAddJobModal">&times;</span>
+            </div>
+            <form id="newJobForm" class="space-y-4">
+                <div>
+                    <label for="jobCustomer" class="form-label">Customer Name</label>
+                    <input type="text" id="jobCustomer" class="form-input" placeholder="e.g., John Doe" required>
+                </div>
+                <div>
+                    <label for="jobAddress" class="form-label">Address</label>
+                    <input type="text" id="jobAddress" class="form-input" placeholder="e.g., 123 Main St, Anytown, CA" required>
+                </div>
+                <div>
+                    <label for="jobIssue" class="form-label">Issue Reported</label>
+                    <textarea id="jobIssue" class="form-input" placeholder="e.g., Garage door won't open, noisy motor" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="jobPhone" class="form-label">Phone Number</label>
+                    <input type="tel" id="jobPhone" class="form-input" placeholder="e.g., (555) 123-4567">
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelAddJob" class="btn-secondary-stitch bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300">Cancel</button>
+                    <button type="submit" id="saveJobButton" class="btn-primary-stitch">Save Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="editTechnicianModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTechName">Edit Technician</h2>
+                <span class="close-button" id="closeEditTechModal">&times;</span>
+            </div>
+            <form id="editTechForm" class="space-y-4">
+                <input type="hidden" id="modalTechId">
+                <div>
+                    <label for="modalTechStatus" class="form-label">Status</label>
+                    <select id="modalTechStatus" class="form-input">
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="modalTechLocation" class="form-label">Current Location / Starting Point</label>
+                    <input type="text" id="modalTechLocation" class="form-input" placeholder="e.g., 123 Main St, Los Angeles, CA">
+                </div>
+                <div>
+                    <label for="modalTechMaxJobs" class="form-label">Max Jobs Per Day</label>
+                    <input type="number" id="modalTechMaxJobs" class="form-input" placeholder="e.g., 5" min="0">
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelEditTech" class="btn-secondary-stitch bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300">Cancel</button>
+                    <button type="submit" class="btn-primary-stitch">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="addPartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h2>Add New Inventory Part</h2><span class="close-button" id="closeAddPartModal">&times;</span></div>
+            <form id="newPartForm" class="space-y-4">
+                <input type="hidden" id="partEditId">
+                <div><label for="partName" class="form-label">Part Name</label><input type="text" id="partName" class="form-input" placeholder="e.g., Torsion Spring 2-inch" required></div>
+                <div><label for="partSKU" class="form-label">SKU / Part Number</label><input type="text" id="partSKU" class="form-input" placeholder="e.g., TS-002-HD" required></div>
+                <div><label for="partCategory" class="form-label">Category</label><input type="text" id="partCategory" class="form-input" placeholder="e.g., Springs, Cables, Openers"></div>
+                <div><label for="partSupplier" class="form-label">Supplier</label><input type="text" id="partSupplier" class="form-input" placeholder="e.g., SpringMaster Inc."></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label for="partStock" class="form-label">Initial Stock</label><input type="number" id="partStock" class="form-input" value="0" min="0" required></div>
+                    <div><label for="partReorderLevel" class="form-label">Reorder Level</label><input type="number" id="partReorderLevel" class="form-input" value="5" min="0" required></div>
+                </div>
+                <div><label for="partUnitCost" class="form-label">Unit Cost (USD)</label><input type="number" step="0.01" id="partUnitCost" class="form-input" placeholder="e.g., 25.50" min="0" required></div>
+                <div class="flex justify-end space-x-3 pt-2"><button type="button" id="cancelAddPart" class="btn-secondary-stitch bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300">Cancel</button><button type="submit" id="savePartButton" class="btn-primary-stitch">Add Part</button></div>
+            </form>
+        </div>
+    </div>
+    <div id="logPartUsageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><h2>Log Part Usage</h2><span class="close-button" id="closeLogPartUsageModal">&times;</span></div>
+            <form id="logPartUsageForm" class="space-y-4">
+                <div>
+                    <label for="usagePartSKU" class="form-label">Part SKU / Name</label>
+                    <input type="text" id="usagePartSKU" class="form-input" placeholder="Search SKU or Name..." list="inventoryPartsList" required>
+                    <datalist id="inventoryPartsList"></datalist>
+                </div>
+                <div><label for="usageQuantity" class="form-label">Quantity Used</label><input type="number" id="usageQuantity" class="form-input" value="1" min="1" required></div>
+                <div>
+                    <label for="usageTechnician" class="form-label">Technician</label>
+                    <select id="usageTechnician" class="form-input" required>
+                        <option value="">Select Technician</option>
+                    </select>
+                </div>
+                <div><label for="usageJobId" class="form-label">Associated Job ID (Optional)</label><input type="text" id="usageJobId" class="form-input" placeholder="e.g., SW1234 (from jobs list)"></div>
+                <div class="flex justify-end space-x-3 pt-2"><button type="button" id="cancelLogPartUsage" class="btn-secondary-stitch bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300">Cancel</button><button type="submit" class="btn-primary-stitch">Log Usage</button></div>
+            </form>
+        </div>
+    </div>
+    <div id="scheduleJobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Schedule Job</h2>
+                <span class="close-button" id="closeScheduleJobModal">&times;</span>
+            </div>
+            <form id="scheduleJobForm" class="space-y-4">
+                <input type="hidden" id="modalScheduleJobId">
+                <div>
+                    <p><strong>Customer:</strong> <span id="modalScheduleCustomer"></span></p>
+                    <p><strong>Address:</strong> <span id="modalScheduleAddress"></span></p>
+                    <p><strong>Issue:</strong> <span id="modalScheduleIssue"></span></p>
+                    <p><strong>Warranty Provider:</strong> <span id="modalScheduleWarrantyProvider"></span></p>
+                    <p><strong>Plan Type:</strong> <span id="modalSchedulePlanType"></span></p>
+                    <p><strong>Dispatch/PO Number:</strong> <span id="modalScheduleDispatchOrPoNumber"></span></p>
+                </div>
+                <div>
+                    <label for="modalJobDate" class="form-label">Select Date</label>
+                    <input type="date" id="modalJobDate" class="form-input" required>
+                </div>
+                <div>
+                    <label for="modalJobTimeSlot" class="form-label">Select Time Slot</label>
+                    <select id="modalJobTimeSlot" class="form-input" required>
+                        <option value="">Select a time slot...</option>
+                        <option value="8am to 2pm">8am to 2pm</option>
+                        <option value="9am to 4pm">9am to 4pm</option>
+                        <option value="12pm to 6pm">12pm to 6pm</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelScheduleJob" class="btn-secondary-stitch bg-slate-200 text-slate-700 border-slate-300 hover:bg-slate-300">Cancel</button>
+                    <button type="submit" class="btn-primary-stitch">Confirm Schedule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
